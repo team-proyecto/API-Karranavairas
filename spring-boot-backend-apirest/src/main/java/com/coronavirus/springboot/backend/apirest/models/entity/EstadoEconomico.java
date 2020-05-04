@@ -12,13 +12,44 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "estados_economicos")
 public class EstadoEconomico implements Serializable {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "nombre_economico")
 	private String nombreEconomico;
+
+	private Boolean estado;
+	
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombreEconomico() {
+		return nombreEconomico;
+	}
+
+	public void setNombreEconomico(String nombreEconomico) {
+		this.nombreEconomico = nombreEconomico;
+	}
+
+	@Override
+	public String toString() {
+		return "EstadoEconomico [id=" + id + ", nombreEconomico=" + nombreEconomico + "]";
+	}
 
 	/**
 	 * 

@@ -12,6 +12,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.Max;
 
 @Entity
 @Table(name = "clientes")
@@ -19,13 +21,16 @@ public class Cliente implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@Column(name = "id")
+	// @Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "nombres_apellidos")
 	private String nombresApellidos;
-	private String provincia;
-	private String departamento;
+	private Boolean provincia;
+
+	@Max(value = 5)
+	@DecimalMax(value = "5", inclusive = true)
+	private Long departamento;
 	private String distrito;
 	private String estado;
 
@@ -37,7 +42,7 @@ public class Cliente implements Serializable {
 	public void prePersist() {
 		this.createAt = new Date();
 	}
-	
+
 	public String getNombresApellidos() {
 		return nombresApellidos;
 	}
@@ -62,19 +67,19 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 
-	public String getProvincia() {
+	public Boolean getProvincia() {
 		return provincia;
 	}
 
-	public void setProvincia(String provincia) {
+	public void setProvincia(Boolean provincia) {
 		this.provincia = provincia;
 	}
 
-	public String getDepartamento() {
+	public Long getDepartamento() {
 		return departamento;
 	}
 
-	public void setDepartamento(String departamento) {
+	public void setDepartamento(Long departamento) {
 		this.departamento = departamento;
 	}
 

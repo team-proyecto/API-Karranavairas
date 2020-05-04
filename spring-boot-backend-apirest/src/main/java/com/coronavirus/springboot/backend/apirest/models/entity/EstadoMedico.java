@@ -11,15 +11,45 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "estados_medicos")
-public class EstadoMedico implements Serializable{
-	
+public class EstadoMedico implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "nombre_medico")
 	private String nombreMedico;
-		
+
+	private Boolean estado;
+	
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombreMedico() {
+		return nombreMedico;
+	}
+
+	public void setNombreMedico(String nombreMedico) {
+		this.nombreMedico = nombreMedico;
+	}
+
+	@Override
+	public String toString() {
+		return "EstadoMedico [id=" + id + ", nombreMedico=" + nombreMedico + "]";
+	}
 	
 
 	/**
