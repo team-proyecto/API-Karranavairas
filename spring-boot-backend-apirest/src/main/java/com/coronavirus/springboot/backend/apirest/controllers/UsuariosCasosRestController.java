@@ -2,7 +2,7 @@ package com.coronavirus.springboot.backend.apirest.controllers;
 
 import java.util.List;
 
-import org.hibernate.annotations.Parameter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coronavirus.springboot.backend.apirest.models.entity.Cliente;
-import com.coronavirus.springboot.backend.apirest.models.entity.Gps;
+import com.coronavirus.springboot.backend.apirest.models.entity.Departamento;
+import com.coronavirus.springboot.backend.apirest.models.entity.Nacionalidad;
+import com.coronavirus.springboot.backend.apirest.models.entity.TipoDocumento;
 import com.coronavirus.springboot.backend.apirest.models.entity.UsuarioCaso;
 import com.coronavirus.springboot.backend.apirest.models.services.IGpsService;
 import com.coronavirus.springboot.backend.apirest.models.services.IUsuariosCasosService;
@@ -28,8 +29,10 @@ import com.coronavirus.springboot.backend.apirest.models.services.IUsuariosCasos
 public class UsuariosCasosRestController {
 	
 	@Autowired
-	IUsuariosCasosService usuariosCasosService;
-	IGpsService gpsService;
+	private IUsuariosCasosService usuariosCasosService;
+	
+	@Autowired
+	private IGpsService gpsService;
 	
 	@GetMapping("/usuarioscasos")
 	public List<UsuarioCaso> index(){
@@ -90,6 +93,19 @@ public class UsuariosCasosRestController {
 	}
 	
 	
+	@GetMapping("/usuarioscasos/documentos")
+	public List<TipoDocumento> listDocumentos(){
+		return usuariosCasosService.findAllDocumentos();
+	}
 	
+	@GetMapping("/usuarioscasos/departamentos")
+	public List<Departamento> listDepartamento() {
+		return usuariosCasosService.findAllDepartamento();
+	}
+	
+	@GetMapping("/usuarioscasos/nacionalidad")
+	public List<Nacionalidad> listNacionalidad() {
+		return usuariosCasosService.findAllNacionalidad();
+	}
 
 }

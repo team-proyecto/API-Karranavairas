@@ -1,6 +1,6 @@
 package com.coronavirus.springboot.backend.apirest.controllers;
 
-import java.awt.print.Printable;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

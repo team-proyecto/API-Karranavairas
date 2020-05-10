@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.coronavirus.springboot.backend.apirest.models.dao.IUsuariosCasosDao;
+import com.coronavirus.springboot.backend.apirest.models.entity.Departamento;
+import com.coronavirus.springboot.backend.apirest.models.entity.Nacionalidad;
+import com.coronavirus.springboot.backend.apirest.models.entity.TipoDocumento;
 import com.coronavirus.springboot.backend.apirest.models.entity.UsuarioCaso;
 
 @Service
 public class UsuariosCasosImpl implements IUsuariosCasosService {
 
 	@Autowired
-	IUsuariosCasosDao iUsuariosCasosDao;
+	private IUsuariosCasosDao iUsuariosCasosDao;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -42,6 +45,24 @@ public class UsuariosCasosImpl implements IUsuariosCasosService {
 	public UsuarioCaso save(UsuarioCaso usuarioCaso) {
 		
 		return iUsuariosCasosDao.save(usuarioCaso);
+	}	
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<TipoDocumento> findAllDocumentos() {
+		return (List<TipoDocumento>) iUsuariosCasosDao.findAllDocumento();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Departamento> findAllDepartamento() {		
+		return (List<Departamento>) iUsuariosCasosDao.findAllDepartamento();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Nacionalidad> findAllNacionalidad() {		
+		return (List<Nacionalidad>) iUsuariosCasosDao.findAllNacionalidad();
 	}
 
 }

@@ -2,7 +2,7 @@ package com.coronavirus.springboot.backend.apirest.models.services;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+
 
 import com.coronavirus.springboot.backend.apirest.models.entity.Gps;
 
