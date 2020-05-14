@@ -27,6 +27,8 @@ INSERT INTO provincias (nombre_provincia,departamento_id,estado) VALUES ('provin
 INSERT INTO provincias (nombre_provincia,departamento_id,estado) VALUES ('provincia6',3,true)
 
 INSERT INTO distritos (nombre_distrito,provincia_id,estado) VALUES ('Comas',1,true)
+INSERT INTO distritos (nombre_distrito,provincia_id,estado) VALUES ('San Juan Lurigancho',1,true)
+INSERT INTO distritos (nombre_distrito,provincia_id,estado) VALUES ('Independencia',1,true)
 INSERT INTO distritos (nombre_distrito,provincia_id,estado) VALUES ('Olivos',2,true)
 INSERT INTO distritos (nombre_distrito,provincia_id,estado) VALUES ('San Martin',3,true)
 INSERT INTO distritos (nombre_distrito,provincia_id,estado) VALUES ('Surco',4,true)
@@ -86,17 +88,17 @@ INSERT INTO reportes_medicos (resultado_triaje,estado_medico_id,fecha_registro,e
 INSERT INTO reportes_medicos (resultado_triaje,estado_medico_id,fecha_registro,estado) VALUES (true,2,'2020-02-13',true)
 INSERT INTO reportes_medicos (resultado_triaje,estado_medico_id,fecha_registro,estado) VALUES (false,1,'2020-02-13',true)
 
-INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,departamento_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','juan','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',1,1,1,1,1,1,1,true);
+INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,distrito_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','juan','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',1,1,1,1,1,1,1,true);
 
-INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,departamento_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','roman','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',2,1,1,2,2,2,2,true);
+INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,distrito_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','roman','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',2,1,1,2,2,2,2,true);
 
-INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,departamento_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','jose','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',3,2,2,3,2,3,3,true);
+INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,distrito_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','jose','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',3,2,2,3,2,3,3,true);
 
-INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,departamento_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','miguel','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',3,2,2,4,2,4,4,true);
+INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,distrito_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','miguel','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',3,2,2,4,2,4,4,true);
 
-INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,departamento_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','edinson','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',4,3,1,5,2,5,5,true);
+INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,distrito_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','edinson','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',4,3,1,5,2,5,5,true);
 
-INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,departamento_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','raul','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',4,3,1,6,2,6,6,true);
+INSERT INTO usuarios_casos (telefono,nombre,apellido,nacimiento,numero_documento,direccion_domicilio,codigo_confirmacion,condicion_uso,fecha_registro,distrito_id,tipo_documento_id,nacionalidad_id,gps_id,tipo_usuario_id,reporte_economico_id,reporte_medico_id,estado) VALUES('954954954','raul','delgado','2020-02-13','43795458','av. algun lugar 123,1era etapa Retablo. Comas',1234,true,'2020-02-13',4,3,1,6,2,6,6,true);
 
 
 

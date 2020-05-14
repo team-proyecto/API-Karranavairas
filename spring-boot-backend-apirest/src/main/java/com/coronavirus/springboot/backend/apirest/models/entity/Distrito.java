@@ -1,15 +1,20 @@
 package com.coronavirus.springboot.backend.apirest.models.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "distritos")
@@ -22,10 +27,16 @@ public class Distrito implements Serializable {
 	@Column(name = "nombre_distrito")
 	private String nombreDistrito;
 
-	@ManyToOne
-	@JoinColumn(name = "provincia_id", nullable = false)
+	@JsonIgnoreProperties(value = {"distrito","hibernateLazyInitializer", "handler"},allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "provincia_id")
 	private Provincia provincia;
-
+	
+	@JsonIgnoreProperties(value={"distrito","hibernateLazyInitializer", "handler"},allowSetters = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "distrito")
+	private List<UsuarioCaso> usuario;
+	
+	
 	private Boolean estado;
 	
 	public Boolean getEstado() {
@@ -51,21 +62,22 @@ public class Distrito implements Serializable {
 	public void setNombreDistrito(String nombreDistrito) {
 		this.nombreDistrito = nombreDistrito;
 	}
-
-	public Provincia getProvinciaId() {
+	
+	public Provincia getProvincia() {
 		return provincia;
 	}
 
-	public void setProvinciaId(Provincia provinciaId) {
-		this.provincia = provinciaId;
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
 	}
-
 	
-	@Override
-	public String toString() {
-		return "Distrito [id=" + id + ", nombreDistrito=" + nombreDistrito + ", provincia=" + provincia + "]";
+	public List<UsuarioCaso> getUsuario() {
+		return usuario;
 	}
 
+	public void setUsuario(List<UsuarioCaso> usuario) {
+		this.usuario = usuario;
+	}
 
 	/**
 	 * 

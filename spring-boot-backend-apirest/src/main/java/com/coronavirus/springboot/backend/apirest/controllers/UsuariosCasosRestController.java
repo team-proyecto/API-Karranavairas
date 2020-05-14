@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coronavirus.springboot.backend.apirest.models.entity.Departamento;
+import com.coronavirus.springboot.backend.apirest.models.entity.Distrito;
 import com.coronavirus.springboot.backend.apirest.models.entity.Nacionalidad;
+import com.coronavirus.springboot.backend.apirest.models.entity.Provincia;
 import com.coronavirus.springboot.backend.apirest.models.entity.TipoDocumento;
 import com.coronavirus.springboot.backend.apirest.models.entity.UsuarioCaso;
 import com.coronavirus.springboot.backend.apirest.models.services.IGpsService;
@@ -73,7 +75,7 @@ public class UsuariosCasosRestController {
 		usuarioCasoActualizado.setNumeroDocumento(usuarioCasoNuevo.getNumeroDocumento());
 		usuarioCasoActualizado.setCodigoConfirmacion(usuarioCasoNuevo.getCodigoConfirmacion());
 		usuarioCasoActualizado.setCondicionUso(usuarioCasoNuevo.getCondicionUso());
-		usuarioCasoActualizado.setDepartamento(usuarioCasoNuevo.getDepartamento());
+		usuarioCasoActualizado.setDistrito(usuarioCasoNuevo.getDistrito());
 		usuarioCasoActualizado.setEstado(usuarioCasoNuevo.getEstado());
 		usuarioCasoActualizado.setFechaRegistro(usuarioCasoNuevo.getFechaRegistro());
 		usuarioCasoActualizado.setGps(usuarioCasoNuevo.getGps());
@@ -98,14 +100,29 @@ public class UsuariosCasosRestController {
 		return usuariosCasosService.findAllDocumentos();
 	}
 	
-	@GetMapping("/usuarioscasos/departamentos")
-	public List<Departamento> listDepartamento() {
-		return usuariosCasosService.findAllDepartamento();
-	}
-	
 	@GetMapping("/usuarioscasos/nacionalidad")
 	public List<Nacionalidad> listNacionalidad() {
 		return usuariosCasosService.findAllNacionalidad();
+	}
+	
+	@GetMapping("/usuarioscasos/departamentos")
+	public List<Departamento> listDepartamento() {
+		return usuariosCasosService.findAllDepartamento();
+	}	
+	
+	@GetMapping("/usuarioscasos/departamentos/{id}")
+	public Departamento listDepartamento(@PathVariable Long id) {
+		return usuariosCasosService.findByIDDepartamento(id);
+	}	
+	
+	@GetMapping("/usuarioscasos/provincias/{id}")
+	public Provincia listProvincias(@PathVariable Long id){
+		return usuariosCasosService.findIDProvincia(id);
+	}
+	
+	@GetMapping("/usuarioscasos/distrito")
+	public List<Distrito> listDistritos(){
+		return usuariosCasosService.findAllDistrito();
 	}
 
 }

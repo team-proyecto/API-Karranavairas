@@ -1,15 +1,21 @@
 package com.coronavirus.springboot.backend.apirest.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "provincias")
@@ -22,11 +28,20 @@ public class Provincia implements Serializable {
 	@Column(name = "nombre_provincia")
 	private String nombreProvincia;
 
-	@ManyToOne
-	@JoinColumn(name = "departamento_id", nullable = false)
+	@JsonIgnoreProperties(value = { "provincia", "hibernateLazyInitializer", "handler" }, allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "departamento_id")
 	private Departamento departamento;
+	
+	@JsonIgnoreProperties(value={"provincia","hibernateLazyInitializer", "handler"},allowSetters = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provincia")
+	private List<Distrito> distrito;	
 
 	private Boolean estado;
+	
+	public Provincia() {
+		this.distrito= new ArrayList<>();
+	}
 	
 	public Boolean getEstado() {
 		return estado;
@@ -51,18 +66,20 @@ public class Provincia implements Serializable {
 	public void setNombreProvincia(String nombreProvincia) {
 		this.nombreProvincia = nombreProvincia;
 	}
+	
+	public List<Distrito> getDistrito() {
+		return distrito;
+	}
 
-	public Departamento getDepartamentoId() {
+	public void setDistrito(List<Distrito> distrito) {
+		this.distrito = distrito;
+	}
+	public Departamento getDepartamento() {
 		return departamento;
 	}
 
-	public void setDepartamentoId(Departamento departamentoId) {
-		this.departamento = departamentoId;
-	}
-
-	@Override
-	public String toString() {
-		return "Provincia [id=" + id + ", nombreProvincia=" + nombreProvincia + ", departamento=" + departamento + "]";
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
 	}
 
 	/**

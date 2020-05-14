@@ -5,7 +5,9 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 import com.coronavirus.springboot.backend.apirest.models.entity.Departamento;
+import com.coronavirus.springboot.backend.apirest.models.entity.Distrito;
 import com.coronavirus.springboot.backend.apirest.models.entity.Nacionalidad;
+import com.coronavirus.springboot.backend.apirest.models.entity.Provincia;
 import com.coronavirus.springboot.backend.apirest.models.entity.TipoDocumento;
 import com.coronavirus.springboot.backend.apirest.models.entity.UsuarioCaso;
 
@@ -14,10 +16,18 @@ public interface IUsuariosCasosDao extends CrudRepository<UsuarioCaso, Long>{
 	@Query("from TipoDocumento")
 	public List<TipoDocumento> findAllDocumento();
 	
-	@Query("from Departamento")
-	public List<Departamento> findAllDepartamento();
-	
 	@Query("from Nacionalidad")
 	public List<Nacionalidad> findAllNacionalidad();
-
+	
+	@Query("from Departamento")
+	public List<Departamento> findAllDepartamento();	
+	
+	@Query("Select d from Departamento d where d.id=?1")
+	public Departamento findByIDDepartamento(Long id);
+	
+	@Query("Select p from Provincia p where p.id=?1")
+	public Provincia findIDProvincia(Long id);
+	
+	@Query("from Distrito")
+	public List<Distrito> findAllDistrito();	
 }

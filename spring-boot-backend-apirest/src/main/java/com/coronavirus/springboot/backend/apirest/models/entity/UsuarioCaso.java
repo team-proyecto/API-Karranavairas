@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,9 +35,7 @@ public class UsuarioCaso implements Serializable {
 	private Date nacimiento;
 
 	@Column(name = "numero_documento")
-	private String numeroDocumento;
-
-	// private String departamento;
+	private String numeroDocumento;	
 
 	@Column(name = "direccion_domicilio")
 	private String direccionDomicilio;
@@ -51,9 +50,10 @@ public class UsuarioCaso implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechaRegistro;
 
-	@ManyToOne
-	@JoinColumn(name = "departamento_id", nullable = true)
-	private Departamento departamento;
+	@JsonIgnoreProperties(value = {"usuarioCaso","hibernateLazyInitializer", "handler"},allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "distrito_id", nullable = true)
+	private Distrito distrito;
 
 	@ManyToOne
 	@JoinColumn(name = "tipo_documento_id", nullable = true)
@@ -168,12 +168,12 @@ public class UsuarioCaso implements Serializable {
 		this.fechaRegistro = fechaRegistro;
 	}
 
-	public Departamento getDepartamento() {
-		return departamento;
+	public Distrito getDistrito() {
+		return distrito;
 	}
 
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
+	public void setDistrito(Distrito distrito) {
+		this.distrito = distrito;
 	}
 
 	public TipoDocumento getTipoDocumento() {
@@ -237,7 +237,7 @@ public class UsuarioCaso implements Serializable {
 		return "UsuarioCaso [id=" + id + ", telefono=" + telefono + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", nacimiento=" + nacimiento + ", numeroDocumento=" + numeroDocumento + ", direccionDomicilio="
 				+ direccionDomicilio + ", codigoConfirmacion=" + codigoConfirmacion + ", condicionUso=" + condicionUso
-				+ ", fechaRegistro=" + fechaRegistro + ", departamento=" + departamento + ", tipoDocumento="
+				+ ", fechaRegistro=" + fechaRegistro + ", distrito=" + distrito + ", tipoDocumento="
 				+ tipoDocumento + ", nacionalidad=" + nacionalidad + ", gps=" + gps + ", tipoUsuario=" + tipoUsuario
 				+ ", resporteEconomico=" + resporteEconomico + ", reporteMedico=" + reporteMedico + "]";
 	}

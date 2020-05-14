@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.coronavirus.springboot.backend.apirest.models.dao.IUsuariosCasosDao;
 import com.coronavirus.springboot.backend.apirest.models.entity.Departamento;
+import com.coronavirus.springboot.backend.apirest.models.entity.Distrito;
 import com.coronavirus.springboot.backend.apirest.models.entity.Nacionalidad;
+import com.coronavirus.springboot.backend.apirest.models.entity.Provincia;
 import com.coronavirus.springboot.backend.apirest.models.entity.TipoDocumento;
 import com.coronavirus.springboot.backend.apirest.models.entity.UsuarioCaso;
 
@@ -55,14 +57,32 @@ public class UsuariosCasosImpl implements IUsuariosCasosService {
 
 	@Override
 	@Transactional(readOnly = true)
+	public List<Nacionalidad> findAllNacionalidad() {		
+		return (List<Nacionalidad>) iUsuariosCasosDao.findAllNacionalidad();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public List<Departamento> findAllDepartamento() {		
 		return (List<Departamento>) iUsuariosCasosDao.findAllDepartamento();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Nacionalidad> findAllNacionalidad() {		
-		return (List<Nacionalidad>) iUsuariosCasosDao.findAllNacionalidad();
+	public Departamento findByIDDepartamento(Long id) {		
+		return iUsuariosCasosDao.findByIDDepartamento(id);
+	}	
+
+	@Override
+	@Transactional(readOnly = true)
+	public Provincia findIDProvincia(Long id) {		
+		return iUsuariosCasosDao.findIDProvincia(id);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Distrito> findAllDistrito() {		
+		return (List<Distrito>) iUsuariosCasosDao.findAllDistrito();
 	}
 
 }
