@@ -42,14 +42,29 @@ public class ReportesMedicosRestController {
 	@Transactional
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public ReporteMedico create (@RequestBody ReporteMedico reporteMedico){
+		
+		
+		/*Boolean triaje = reporteMedico.getResultadoTriaje();
+		
+		EstadoMedico estadoMedico ;
+		
+		Long condicion;
+		if(triaje = true) {
+			condicion = estadoMedico.definirEstadoMedico((long) 2);
+		}else {
+			condicion = estadoMedico.definirEstadoMedico((long) 1);
+		}
+			
+			reporteMedico.setEstadoMedico(estadoMedico);*/
+		
 		return reportesMedicosService.save(reporteMedico);
 	}
 	
 	@PutMapping("/rmedicos/{id}")
 	@Transactional
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public ReporteMedico update (@RequestBody ReporteMedico reporteMedico, EstadoMedico estadoMedico, @PathVariable Long id){
-		System.out.println("1"+estadoMedico);
+	public ReporteMedico update (@RequestBody ReporteMedico reporteMedico, @PathVariable Long id){
+		//System.out.println("1"+estadoMedico);
 		//estadoMedico.setId((long) 1);	
 		//System.out.println("1"+estadoMedico);
 		ReporteMedico reporteMedicoActualizado = reportesMedicosService.findById(id);
@@ -60,11 +75,11 @@ public class ReportesMedicosRestController {
 		//System.out.println("3"+estadoMedico);
 		//System.out.println("resultado"+resultado);
 		
-		if(resultado == true) {			
+		//if(resultado == true) {			
 			//System.out.println("resultado en condicional"+resultado);
-			estadoMedico.setId((long) 2);	
+			reporteMedicoActualizado.setEstadoMedico(reporteMedico.getEstadoMedico());	
 			//System.out.println("en condicional"+estadoMedico);
-		}
+		//}
 		//System.out.println("fuera de condicional"+estadoMedico);
 		//reporteMedicoActualizado.setEstadoMedico(estadoMedico);
 		

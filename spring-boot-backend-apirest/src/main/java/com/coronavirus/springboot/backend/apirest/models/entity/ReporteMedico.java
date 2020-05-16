@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "reportes_medicos")
@@ -29,10 +32,11 @@ public class ReporteMedico implements Serializable {
 	private Boolean resultadoTriaje;
 
 	@ManyToOne
-	@JoinColumn(name = "estado_medico_id", nullable = false)
+	@JoinColumn(name = "estado_medico_id", nullable = true)
 	private EstadoMedico estadoMedico;
 	
 	private Boolean estado;
+		
 	
 	public Boolean getEstado() {
 		return estado;

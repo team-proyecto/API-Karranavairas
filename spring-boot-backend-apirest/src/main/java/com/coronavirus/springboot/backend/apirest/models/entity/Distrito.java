@@ -34,7 +34,7 @@ public class Distrito implements Serializable {
 	
 	@JsonIgnoreProperties(value={"distrito","hibernateLazyInitializer", "handler"},allowSetters = true)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "distrito")
-	private List<UsuarioCaso> usuario;
+	private List<UsuarioCaso> usuarioCaso;
 	
 	
 	private Boolean estado;
@@ -70,14 +70,17 @@ public class Distrito implements Serializable {
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
 	}
-	
-	public List<UsuarioCaso> getUsuario() {
-		return usuario;
+		
+
+	public List<UsuarioCaso> getUsuarioCaso() {
+		return usuarioCaso;
 	}
 
-	public void setUsuario(List<UsuarioCaso> usuario) {
-		this.usuario = usuario;
+	public void setUsuarioCaso(List<UsuarioCaso> usuarioCaso) {
+		this.usuarioCaso = usuarioCaso;
 	}
+
+
 
 	/**
 	 * 

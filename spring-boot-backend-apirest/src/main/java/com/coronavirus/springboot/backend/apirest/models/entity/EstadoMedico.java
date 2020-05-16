@@ -1,13 +1,18 @@
 package com.coronavirus.springboot.backend.apirest.models.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "estados_medicos")
@@ -21,6 +26,7 @@ public class EstadoMedico implements Serializable {
 	private String nombreMedico;
 
 	private Boolean estado;
+	
 	
 	public Boolean getEstado() {
 		return estado;
@@ -36,6 +42,10 @@ public class EstadoMedico implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Long definirEstadoMedico(Long id) {
+		return id;
 	}
 
 	public String getNombreMedico() {
