@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coronavirus.springboot.backend.apirest.models.entity.EstadoMedico;
 import com.coronavirus.springboot.backend.apirest.models.entity.ReporteMedico;
+import com.coronavirus.springboot.backend.apirest.models.services.IEstadoMedicoService;
 import com.coronavirus.springboot.backend.apirest.models.services.IReportesMedicosService;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
@@ -27,6 +28,7 @@ import com.coronavirus.springboot.backend.apirest.models.services.IReportesMedic
 public class ReportesMedicosRestController {
 	@Autowired
 	IReportesMedicosService reportesMedicosService;
+	IEstadoMedicoService estadoMedicoService;
 	
 	@GetMapping("/rmedicos")
 	public List<ReporteMedico> index (){
@@ -43,19 +45,30 @@ public class ReportesMedicosRestController {
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public ReporteMedico create (@RequestBody ReporteMedico reporteMedico){
 		
+		/*System.out.println(reporteMedico);
 		
-		/*Boolean triaje = reporteMedico.getResultadoTriaje();
+		ReporteMedico nuevoReporteMedico = reportesMedicosService.save(reporteMedico);
 		
-		EstadoMedico estadoMedico ;
+		//ReporteMedico nuevoReporteMedico = new ReporteMedico();
 		
-		Long condicion;
-		if(triaje = true) {
-			condicion = estadoMedico.definirEstadoMedico((long) 2);
+		Boolean triaje = nuevoReporteMedico.getResultadoTriaje();
+		
+		nuevoReporteMedico.setResultadoTriaje(triaje);
+				
+		
+		EstadoMedico estadoMedicoEnRiesgo = estadoMedicoService.findById((long)2) ;
+		EstadoMedico estadoMedicoNormal = estadoMedicoService.findById((long)1) ;
+		
+		
+		if(reporteMedico.getResultadoTriaje() == true) {
+			nuevoReporteMedico.setEstadoMedico(estadoMedicoEnRiesgo);
 		}else {
-			condicion = estadoMedico.definirEstadoMedico((long) 1);
+			nuevoReporteMedico.setEstadoMedico(estadoMedicoNormal);
 		}
 			
-			reporteMedico.setEstadoMedico(estadoMedico);*/
+		nuevoReporteMedico.setEstado(true);
+			
+			System.out.println(nuevoReporteMedico);*/
 		
 		return reportesMedicosService.save(reporteMedico);
 	}
@@ -96,6 +109,16 @@ public class ReportesMedicosRestController {
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void delete (@PathVariable Long id){
 		reportesMedicosService.delete(id);
+	}
+	
+	@GetMapping("/rmedicos/estadosmedicos")
+	public List<EstadoMedico> listAll ( ){
+		return estadoMedicoService.findAll();
+	}
+	
+	@GetMapping("/rmedicos/estadosmedicos/{id}")
+	public EstadoMedico showEstado (@PathVariable Long id){
+		return estadoMedicoService.findById(id);
 	}
 
 

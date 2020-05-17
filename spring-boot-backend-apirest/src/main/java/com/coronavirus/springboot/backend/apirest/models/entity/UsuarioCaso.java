@@ -72,12 +72,14 @@ public class UsuarioCaso implements Serializable {
 	@JoinColumn(name = "tipo_usuario_id", nullable = true)
 	private TipoUsuario tipoUsuario;
 
+	@JsonIgnoreProperties({"usuarioCaso"})
 	@OneToOne
-	@JoinColumn(name = "reporte_economico_id", nullable = true)
-	private ReporteEconomico resporteEconomico;
+	@JoinColumn(name = "reporte_economico_id",referencedColumnName = "id", nullable = true)
+	private ReporteEconomico reporteEconomico;
 
+	@JsonIgnoreProperties({"usuarioCaso"})
 	@OneToOne
-	@JoinColumn(name = "reporte_medico_id", nullable = true)
+	@JoinColumn(name = "reporte_medico_id",referencedColumnName = "id", nullable = true)
 	private ReporteMedico reporteMedico;
 
 	@Column(name = "estado")
@@ -208,12 +210,12 @@ public class UsuarioCaso implements Serializable {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public ReporteEconomico getResporteEconomico() {
-		return resporteEconomico;
+	public ReporteEconomico getReporteEconomico() {
+		return reporteEconomico;
 	}
 
-	public void setResporteEconomico(ReporteEconomico resporteEconomico) {
-		this.resporteEconomico = resporteEconomico;
+	public void setReporteEconomico(ReporteEconomico reporteEconomico) {
+		this.reporteEconomico = reporteEconomico;
 	}
 
 	public ReporteMedico getReporteMedico() {
@@ -239,7 +241,7 @@ public class UsuarioCaso implements Serializable {
 				+ direccionDomicilio + ", codigoConfirmacion=" + codigoConfirmacion + ", condicionUso=" + condicionUso
 				+ ", fechaRegistro=" + fechaRegistro + ", distrito=" + distrito + ", tipoDocumento="
 				+ tipoDocumento + ", nacionalidad=" + nacionalidad + ", gps=" + gps + ", tipoUsuario=" + tipoUsuario
-				+ ", resporteEconomico=" + resporteEconomico + ", reporteMedico=" + reporteMedico + "]";
+				+ ", resporteEconomico=" + reporteEconomico + ", reporteMedico=" + reporteMedico + "]";
 	}
 
 	/**

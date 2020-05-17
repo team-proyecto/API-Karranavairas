@@ -82,7 +82,7 @@ public class UsuariosCasosRestController {
 		usuarioCasoActualizado.setNacimiento(usuarioCasoNuevo.getNacimiento());
 		usuarioCasoActualizado.setNacionalidad(usuarioCasoNuevo.getNacionalidad());
 		usuarioCasoActualizado.setReporteMedico(usuarioCasoNuevo.getReporteMedico());
-		usuarioCasoActualizado.setResporteEconomico(usuarioCasoNuevo.getResporteEconomico());
+		usuarioCasoActualizado.setReporteEconomico(usuarioCasoNuevo.getReporteEconomico());
 		usuarioCasoActualizado.setTipoUsuario(usuarioCasoNuevo.getTipoUsuario());		
 		
 		return usuariosCasosService.save(usuarioCasoActualizado);

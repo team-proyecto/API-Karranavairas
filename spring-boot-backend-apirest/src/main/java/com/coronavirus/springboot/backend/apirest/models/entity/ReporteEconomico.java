@@ -10,10 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "reportes_economicos")
@@ -38,6 +41,10 @@ public class ReporteEconomico implements Serializable {
 	
 	private Boolean estado;
 	
+	@JsonIgnoreProperties({"reporteEconomico"})
+	@OneToOne(mappedBy = "reporteEconomico")	
+	private UsuarioCaso usuarioCaso;
+	
 	public Boolean getEstado() {
 		return estado;
 	}
@@ -50,6 +57,26 @@ public class ReporteEconomico implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechaRegistro;
 	
+	
+	
+	
+	
+	public EstadoEconomico getEstadoEconomico() {
+		return estadoEconomico;
+	}
+
+	public void setEstadoEconomico(EstadoEconomico estadoEconomico) {
+		this.estadoEconomico = estadoEconomico;
+	}
+
+	public UsuarioCaso getUsuarioCaso() {
+		return usuarioCaso;
+	}
+
+	public void setUsuarioCaso(UsuarioCaso usuarioCaso) {
+		this.usuarioCaso = usuarioCaso;
+	}
+
 	@PrePersist
 	public void prePersist() {
 		this.fechaRegistro = new Date();

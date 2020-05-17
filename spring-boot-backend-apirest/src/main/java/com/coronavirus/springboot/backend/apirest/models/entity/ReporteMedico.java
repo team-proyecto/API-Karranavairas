@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import java.util.Date;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -34,10 +34,40 @@ public class ReporteMedico implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "estado_medico_id", nullable = true)
 	private EstadoMedico estadoMedico;
-	
+
 	private Boolean estado;
-		
+
+	@Column(name = "fecha_registro")
+	@Temporal(TemporalType.DATE)
+	private Date fechaRegistro;
 	
+	
+	@JsonIgnoreProperties({"reporteMedico"})
+	@OneToOne(mappedBy = "reporteMedico")	
+	private UsuarioCaso usuarioCaso;
+
+	@PrePersist
+	public void prePersist() {
+		this.fechaRegistro = new Date();
+	}
+	
+	
+	
+
+	public UsuarioCaso getUsuarioCaso() {
+		return usuarioCaso;
+	}
+
+
+
+
+	public void setUsuarioCaso(UsuarioCaso usuarioCaso) {
+		this.usuarioCaso = usuarioCaso;
+	}
+
+
+
+
 	public Boolean getEstado() {
 		return estado;
 	}
@@ -45,18 +75,7 @@ public class ReporteMedico implements Serializable {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	
-	@Column(name = "fecha_registro")
-	@Temporal(TemporalType.DATE)
-	private Date fechaRegistro;
-	
-	@PrePersist
-	public void prePersist() {
-		this.fechaRegistro = new Date();
-	}
-	
 
-	
 	public Date getFechaRegistro() {
 		return fechaRegistro;
 	}
@@ -80,7 +99,7 @@ public class ReporteMedico implements Serializable {
 	public void setResultadoTriaje(Boolean resultadoTriaje) {
 		this.resultadoTriaje = resultadoTriaje;
 	}
-	
+
 	public EstadoMedico getEstadoMedico() {
 		return estadoMedico;
 	}
@@ -90,12 +109,12 @@ public class ReporteMedico implements Serializable {
 	}
 
 	public void definirEstado(Boolean triaje) {
-		this.resultadoTriaje=triaje;
+		this.resultadoTriaje = triaje;
 //		List<EstadoMedico> listaEstadoMedicos = new ArrayList<EstadoMedico>();
-		
-		if(triaje = true) {
+
+		if (triaje = true) {
 			this.estadoMedico.setId((long) 2);
-						
+
 //			setEstadoMedico(listaEstadoMedicos.get(2));
 		}
 	}
