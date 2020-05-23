@@ -1,10 +1,17 @@
 package com.coronavirus.springboot.backend.apirest.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coronavirus.springboot.backend.apirest.models.entity.Cliente;
 import com.coronavirus.springboot.backend.apirest.models.entity.Departamento;
 import com.coronavirus.springboot.backend.apirest.models.entity.Distrito;
 import com.coronavirus.springboot.backend.apirest.models.entity.Nacionalidad;
@@ -42,31 +50,86 @@ public class UsuariosCasosRestController {
 	}
 	
 	@GetMapping("/usuarioscasos/{id}")
-	public UsuarioCaso show(@PathVariable Long id) {
-		return usuariosCasosService.findById(id);
+	public ResponseEntity<?> show(@PathVariable Long id) {
+		UsuarioCaso usuarioCaso = null;
+		Map<String, Object> response =  new HashMap<>();
+		
+		try {
+			usuarioCaso  = usuariosCasosService.findById(id);
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		if(usuarioCaso == null)
+		{
+			response.put("mensaje", "El usuarioCaso ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+				
+		return new ResponseEntity<UsuarioCaso>(usuarioCaso,HttpStatus.OK);		
 	}
 	
 	@PostMapping("/usuarioscasos")
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public UsuarioCaso save(@RequestBody UsuarioCaso usuarioCaso) {
+	public ResponseEntity<?> save(@Valid @RequestBody UsuarioCaso usuarioCaso, BindingResult result) {
 		
-		//Gps gpsNuevo = gpsService.save(gps);
+		UsuarioCaso usuarioCasoNew = null;
+		Map<String, Object> response =  new HashMap<>();
 		
-		//gpsNuevo.getId();
+		//devuelve los errores por campo en forma de lista
+		if(result.hasErrors()) {						
+			List<String> errors = result.getFieldErrors()
+					.stream()
+					.map(err -> "El campo '"+ err.getField() +"' "+ err.getDefaultMessage())
+					.collect(Collectors.toList());			
+			
+			response.put("errors", errors);
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
 		
-		//UsuarioCaso usuarioCasoNuevo = 
-		
-		//usuarioCasoNuevo.setGps(gpsNuevo);
-		
-		return usuariosCasosService.save(usuarioCaso);
+		try {
+			usuarioCasoNew  = usuariosCasosService.save(usuarioCaso);
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	
+			
+		response.put("mensaje", "El usuarioCaso ha sido creado con éxito!");
+		response.put("usuarioCaso",  usuarioCasoNew);
+		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);		
 	}
 	
 	@PutMapping("/usuarioscasos/{id}")
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public UsuarioCaso update(@RequestBody UsuarioCaso usuarioCasoNuevo, @PathVariable Long id) {
+	public ResponseEntity<?> update(@Valid @RequestBody UsuarioCaso usuarioCasoNuevo,BindingResult result, @PathVariable Long id) {
+		
 		UsuarioCaso usuarioCasoActualizado;
 		usuarioCasoActualizado = usuariosCasosService.findById(id);
 		
+		UsuarioCaso usuarioCasoUpdated = null;
+		
+		Map<String, Object> response =  new HashMap<>();
+		
+		if(result.hasErrors()) {					
+			List<String> errors = result.getFieldErrors()
+					.stream()
+					.map(err -> "El campo '"+ err.getField() +"' "+ err.getDefaultMessage())
+					.collect(Collectors.toList());			
+			response.put("errors", errors);
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+		
+		if(usuarioCasoActualizado == null)
+		{
+			response.put("mensaje", "Error: no se pudo editar, el usuarioCaso ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		try {
 		usuarioCasoActualizado.setTelefono(usuarioCasoNuevo.getTelefono());
 		usuarioCasoActualizado.setNombre(usuarioCasoNuevo.getNombre());
 		usuarioCasoActualizado.setApellido(usuarioCasoNuevo.getApellido());
@@ -85,13 +148,33 @@ public class UsuariosCasosRestController {
 		usuarioCasoActualizado.setReporteEconomico(usuarioCasoNuevo.getReporteEconomico());
 		usuarioCasoActualizado.setTipoUsuario(usuarioCasoNuevo.getTipoUsuario());		
 		
-		return usuariosCasosService.save(usuarioCasoActualizado);
+		usuarioCasoUpdated = usuariosCasosService.save(usuarioCasoActualizado);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al actualizar el usuarioCaso en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		response.put("mensaje", "El usuarioCaso ha sido actualizado con éxito!");
+		response.put("usuarioCaso",  usuarioCasoUpdated);
+		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/usuarioscasos/{id}")
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Long id) {				
-		usuariosCasosService.delete(id);
+	public ResponseEntity<?> delete(@PathVariable Long id) {	
+		
+		Map<String, Object> response =  new HashMap<>();
+		
+		try {						
+			usuariosCasosService.delete(id);		
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("mensaje", "Error al eliminar el usuarioCaso en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.put("mensaje", "El usuarioCaso ha sido eliminado con éxito!");
+		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);	
 	}
 	
 	

@@ -13,7 +13,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "clientes")
@@ -24,14 +27,21 @@ public class Cliente implements Serializable {
 	// @Column(name = "id")
 	private Long id;
 
-	@Column(name = "nombres_apellidos")
+	@Column(name = "nombres_apellidos", nullable =  false)	
 	private String nombresApellidos;
+	
 	private Boolean provincia;
 
 	@Max(value = 5)
+	@NotEmpty
 	@DecimalMax(value = "5", inclusive = true)
 	private Long departamento;
+	@Email
+	@NotEmpty
+	@Size(min=8, max=20)
+	@Column(unique = true, nullable =  false)	
 	private String distrito;
+	@NotEmpty
 	private String estado;
 
 	@Column(name = "create_at")

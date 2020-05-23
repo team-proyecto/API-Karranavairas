@@ -1,11 +1,19 @@
 package com.coronavirus.springboot.backend.apirest.controllers;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coronavirus.springboot.backend.apirest.models.entity.Cliente;
 import com.coronavirus.springboot.backend.apirest.models.entity.EstadoEconomico;
 import com.coronavirus.springboot.backend.apirest.models.entity.ReporteEconomico;
 
@@ -39,80 +48,115 @@ public class ReportesEconomicosRestController {
 	}
 	
 	@GetMapping("/reconomicos/{id}")
-	public ReporteEconomico show (@PathVariable Long id){
-		return reporteEconomicoService.findById(id);
+	public ResponseEntity<?> show (@PathVariable Long id){
+		ReporteEconomico reporteEconomico = null;
+		Map<String, Object> response =  new HashMap<>();
+		
+		try {
+			reporteEconomico  = reporteEconomicoService.findById(id);
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		if(reporteEconomico == null)
+		{
+			response.put("mensaje", "El reporteEconomico ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+				
+		return new ResponseEntity<ReporteEconomico>(reporteEconomico,HttpStatus.OK);
 	}
 	
 	@PostMapping("/reconomicos")
 	@Transactional
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public ReporteEconomico create (@RequestBody ReporteEconomico reporteEconomico){
-		
-		/*System.out.println(reporteMedico);
-		
-		ReporteMedico nuevoReporteMedico = reportesMedicosService.save(reporteMedico);
-		
-		//ReporteMedico nuevoReporteMedico = new ReporteMedico();
-		
-		Boolean triaje = nuevoReporteMedico.getResultadoTriaje();
-		
-		nuevoReporteMedico.setResultadoTriaje(triaje);
+	public ResponseEntity<?> create (@Valid @RequestBody ReporteEconomico reporteEconomico, BindingResult result ){
+				ReporteEconomico reporteEconomicoNew = null;
+				Map<String, Object> response =  new HashMap<>();
 				
+				if(result.hasErrors()) {
+					List<String> errors = result.getFieldErrors()
+							.stream()
+							.map(err -> "El campo '"+ err.getField() +"' "+ err.getDefaultMessage())
+							.collect(Collectors.toList());
+					response.put("errors", errors);
+					return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+				}
+				
+				try {
+					reporteEconomicoNew  = reporteEconomicoService.save(reporteEconomico);
+				} catch (DataAccessException e) {
+					// TODO: handle exception
+					response.put("mensaje", "Error al realizar el insert en la base de datos");
+					response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+					return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+				}
 		
-		EstadoMedico estadoMedicoEnRiesgo = estadoMedicoService.findById((long)2) ;
-		EstadoMedico estadoMedicoNormal = estadoMedicoService.findById((long)1) ;
-		
-		
-		if(reporteMedico.getResultadoTriaje() == true) {
-			nuevoReporteMedico.setEstadoMedico(estadoMedicoEnRiesgo);
-		}else {
-			nuevoReporteMedico.setEstadoMedico(estadoMedicoNormal);
-		}
-			
-		nuevoReporteMedico.setEstado(true);
-			
-			System.out.println(nuevoReporteMedico);*/
-		
-		return reporteEconomicoService.save(reporteEconomico);
+				response.put("mensaje", "El reporteEconomico ha sido creado con éxito!");
+				response.put("reporteEconomico",  reporteEconomicoNew);
+				return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/reconomicos/{id}")
 	@Transactional
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public ReporteEconomico update (@RequestBody ReporteEconomico reporteEconomico, @PathVariable Long id){
-		//System.out.println("1"+estadoMedico);
-		//estadoMedico.setId((long) 1);	
-		//System.out.println("1"+estadoMedico);
+	public ResponseEntity<?> update (@Valid @RequestBody ReporteEconomico reporteEconomico,BindingResult result, @PathVariable Long id){
+
 		ReporteEconomico reporteEconomicoActualizado = reporteEconomicoService.findById(id);
-		//System.out.println("1"+estadoMedico);
-		Boolean resultado = reporteEconomico.getBonoAsignado();
-		//System.out.println("2"+estadoMedico);
-		reporteEconomicoActualizado.setBonoAsignado(resultado);
-		//System.out.println("3"+estadoMedico);
-		//System.out.println("resultado"+resultado);
 		
-		//if(resultado == true) {			
-			//System.out.println("resultado en condicional"+resultado);
-		reporteEconomicoActualizado.setMontoServicio(reporteEconomico.getMontoServicio());	
-			//System.out.println("en condicional"+estadoMedico);
-		//}
-		//System.out.println("fuera de condicional"+estadoMedico);
-		//reporteMedicoActualizado.setEstadoMedico(estadoMedico);
+		ReporteEconomico reporteEconomicoUpdated= null;
 		
-		//reporteMedicoActualizado.definirEstado(reporteMedico.getResultadoTriaje());
-		reporteEconomicoActualizado.setBoletaImagen(reporteEconomico.getBoletaImagen());
-			
+		Map<String, Object> response =  new HashMap<>();
+		
+		if(result.hasErrors()) {
+			List<String> errors = result.getFieldErrors()
+					.stream()
+					.map(err -> "El campo '"+ err.getField() +"' "+ err.getDefaultMessage())
+					.collect(Collectors.toList());
+			response.put("errors", errors);
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+		if(reporteEconomicoActualizado == null)
+		{
+			response.put("mensaje", "Error: no se pudo editar, el reporteEconomico ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		try {
+
+		reporteEconomicoActualizado.setBonoAsignado(reporteEconomico.getBonoAsignado());	
+		reporteEconomicoActualizado.setMontoServicio(reporteEconomico.getMontoServicio());			
+		reporteEconomicoActualizado.setBoletaImagen(reporteEconomico.getBoletaImagen());			
 		reporteEconomicoActualizado.setEstado(reporteEconomico.getEstado());
 		
+		reporteEconomicoUpdated = reporteEconomicoService.save(reporteEconomicoActualizado);
 		
-		return reporteEconomicoService.save(reporteEconomicoActualizado);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al actualizar el reporteEconomico en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		response.put("mensaje", "El reporteEconomico ha sido actualizado con éxito!");
+		response.put("reporteEconomico",  reporteEconomicoUpdated);
+		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/reconomicos/{id}")
 	@Transactional
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void delete (@PathVariable Long id){
+	public ResponseEntity<?> delete (@PathVariable Long id){
+		Map<String, Object> response =  new HashMap<>();
+		
+		try {
 		reporteEconomicoService.delete(id);
+		}catch(DataAccessException e) {
+			response.put("mensaje", "Error al eliminar el reporteEconomico en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		response.put("mensaje", "El reporteEconomico ha sido eliminado con éxito!");
+		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);	
 	}
 	
 	@GetMapping("/reconomicos/estadoseconomicos")
