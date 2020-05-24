@@ -35,7 +35,7 @@ import com.coronavirus.springboot.backend.apirest.models.entity.UsuarioCaso;
 import com.coronavirus.springboot.backend.apirest.models.services.IGpsService;
 import com.coronavirus.springboot.backend.apirest.models.services.IUsuariosCasosService;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200","*"})
 @RestController
 @RequestMapping("/api")
 public class UsuariosCasosRestController {

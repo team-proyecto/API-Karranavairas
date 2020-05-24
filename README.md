@@ -7,3 +7,12 @@ herramientas usadas (java, spring, jwt)
 -Maven
 -Mysql Ver 14.14 Distrib 5.7.29
 -Postman
+
+
+//para crear jar en linux:
+
+ mvn clean package -Pjar
+
+//para crear jar en Windows
+
+ .\mvnw.cmd clean package

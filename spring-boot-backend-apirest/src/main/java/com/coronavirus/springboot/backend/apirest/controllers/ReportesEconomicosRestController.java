@@ -51,7 +51,7 @@ import com.coronavirus.springboot.backend.apirest.models.services.IEstadoEconomi
 import com.coronavirus.springboot.backend.apirest.models.services.IReporteEconomicoService;
 
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200","*"})
 @RestController
 @RequestMapping("/api")
 public class ReportesEconomicosRestController {

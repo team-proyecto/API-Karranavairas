@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.coronavirus.springboot.backend.apirest.models.entity.Cliente;
 import com.coronavirus.springboot.backend.apirest.models.services.IClienteService;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200","*"})
 @RestController
 @RequestMapping("/api")
 public class ClienteRestController {

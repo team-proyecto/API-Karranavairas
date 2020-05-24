@@ -28,7 +28,7 @@ import com.coronavirus.springboot.backend.apirest.models.entity.Cliente;
 import com.coronavirus.springboot.backend.apirest.models.entity.Gps;
 import com.coronavirus.springboot.backend.apirest.models.services.IGpsService;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200","*"})
 @RestController
 @RequestMapping("/api")
 public class GpsRestController {

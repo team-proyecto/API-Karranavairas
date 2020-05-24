@@ -33,7 +33,7 @@ import com.coronavirus.springboot.backend.apirest.models.entity.ReporteMedico;
 import com.coronavirus.springboot.backend.apirest.models.services.IEstadoMedicoService;
 import com.coronavirus.springboot.backend.apirest.models.services.IReportesMedicosService;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200","*"})
 @RestController
 @RequestMapping("/api")
 public class ReportesMedicosRestController {
