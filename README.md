@@ -33,3 +33,8 @@ https://api-corona-spring.herokuapp.com/
 //ver logs de deploy
 heroku logs --tail
 
+//subir cambios
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
+
