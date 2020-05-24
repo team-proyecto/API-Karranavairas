@@ -22,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +65,11 @@ public class ReportesEconomicosRestController {
 	@GetMapping("/reconomicos")
 	public List<ReporteEconomico> index (){
 		return reporteEconomicoService.findAll();
+	}
+	
+	@GetMapping("/reconomicos/page/{page}")
+	public Page<ReporteEconomico> index (@PathVariable Integer page){
+		return reporteEconomicoService.findAll(PageRequest.of(page, 2));
 	}
 	
 	@GetMapping("/reconomicos/{id}")

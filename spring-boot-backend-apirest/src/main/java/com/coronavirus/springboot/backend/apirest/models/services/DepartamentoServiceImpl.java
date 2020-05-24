@@ -3,6 +3,8 @@ package com.coronavirus.springboot.backend.apirest.models.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,12 @@ public class DepartamentoServiceImpl implements IDepartamentoService {
 		
 		return (List<Departamento>) iDepartamentoDao.findAll();
 	}
+	
+	@Override
+	public Page<Departamento> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return iDepartamentoDao.findAll(pageable);
+	}	
 
 	@Override
 	@Transactional(readOnly = true)
@@ -44,7 +52,9 @@ public class DepartamentoServiceImpl implements IDepartamentoService {
 	public Departamento save(Departamento departamento) {
 		
 		return iDepartamentoDao.save(departamento);
-	}	
+	}
+
+	
 
 	
 

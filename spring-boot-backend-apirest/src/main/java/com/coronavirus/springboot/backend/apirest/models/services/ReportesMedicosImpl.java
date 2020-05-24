@@ -3,6 +3,8 @@ package com.coronavirus.springboot.backend.apirest.models.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -20,6 +22,12 @@ public class ReportesMedicosImpl implements IReportesMedicosService {
 	public List<ReporteMedico> findAll(){
 		
 		return (List<ReporteMedico>) reportesMedicosDao.findAll();
+	}
+	
+	@Override
+	public Page<ReporteMedico> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return reportesMedicosDao.findAll(pageable);
 	}
 
 	@Override
@@ -39,5 +47,7 @@ public class ReportesMedicosImpl implements IReportesMedicosService {
 		reportesMedicosDao.deleteById(id);
 		
 	}
+
+	
 
 }

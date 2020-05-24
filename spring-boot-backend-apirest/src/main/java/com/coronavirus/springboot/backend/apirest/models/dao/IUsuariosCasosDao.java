@@ -1,7 +1,8 @@
 package com.coronavirus.springboot.backend.apirest.models.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+
 import java.util.List;
 
 import com.coronavirus.springboot.backend.apirest.models.entity.Departamento;
@@ -11,7 +12,7 @@ import com.coronavirus.springboot.backend.apirest.models.entity.Provincia;
 import com.coronavirus.springboot.backend.apirest.models.entity.TipoDocumento;
 import com.coronavirus.springboot.backend.apirest.models.entity.UsuarioCaso;
 
-public interface IUsuariosCasosDao extends CrudRepository<UsuarioCaso, Long>{
+public interface IUsuariosCasosDao extends JpaRepository<UsuarioCaso, Long>{
 	
 	@Query("from TipoDocumento")
 	public List<TipoDocumento> findAllDocumento();

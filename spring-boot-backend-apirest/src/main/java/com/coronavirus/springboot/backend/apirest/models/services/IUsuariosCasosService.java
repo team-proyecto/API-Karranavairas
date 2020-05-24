@@ -2,6 +2,9 @@ package com.coronavirus.springboot.backend.apirest.models.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.coronavirus.springboot.backend.apirest.models.entity.Departamento;
 import com.coronavirus.springboot.backend.apirest.models.entity.Distrito;
 import com.coronavirus.springboot.backend.apirest.models.entity.Nacionalidad;
@@ -12,6 +15,8 @@ import com.coronavirus.springboot.backend.apirest.models.entity.UsuarioCaso;
 public interface IUsuariosCasosService {
 	
 	public List<UsuarioCaso> findAll();
+	
+	public Page<UsuarioCaso> findAll(Pageable pageable);
 	
 	public UsuarioCaso findById (Long id);
 	
