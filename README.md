@@ -16,3 +16,12 @@ herramientas usadas (java, spring, jwt)
 //para crear jar en Windows
 
  .\mvnw.cmd clean package
+
+//deploy en heroku
+heroku login
+heroku git:remote -a api-corona-spring
+heroku plugins:install java
+heroku addons:create jawsdb
+heroku config:get JAWSDB_URL
+mysql://k4kgo5711asus25p:n0co3oy96id6z7fl@pqxt96p7ysz6rn1f.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/uim9e0kix598bv7f
+
