@@ -1,5 +1,6 @@
 package com.coronavirus.springboot.backend.apirest.models.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -35,5 +36,7 @@ public interface IUsuariosCasosService {
 	public Provincia findIDProvincia(Long id);
 
 	public List<Distrito> findAllDistrito();
+	
+	public List<UsuarioCaso> findByFechaRegistro(Date fechaInicio, Date fechaFinal);
 	
 }

@@ -15,9 +15,6 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
-import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -38,11 +35,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.coronavirus.springboot.backend.apirest.models.entity.Cliente;
 import com.coronavirus.springboot.backend.apirest.models.entity.EstadoEconomico;
 import com.coronavirus.springboot.backend.apirest.models.entity.ReporteEconomico;
 
@@ -70,6 +65,11 @@ public class ReportesEconomicosRestController {
 	@GetMapping("/reconomicos/page/{page}")
 	public Page<ReporteEconomico> index (@PathVariable Integer page){
 		return reporteEconomicoService.findAll(PageRequest.of(page, 2));
+	}
+	
+	@GetMapping("/reconomicos/reporte")
+	public List<ReporteEconomico> reportePorEstadoMedico (@RequestParam Long estadoEconomicoId){
+		return reporteEconomicoService.findByEstadoEconomico(estadoEconomicoId);
 	}
 	
 	@GetMapping("/reconomicos/{id}")

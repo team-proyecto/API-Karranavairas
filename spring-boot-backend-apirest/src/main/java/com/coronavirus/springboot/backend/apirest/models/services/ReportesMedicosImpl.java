@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 import com.coronavirus.springboot.backend.apirest.models.dao.IReportesMedicosDao;
 
@@ -21,7 +21,7 @@ public class ReportesMedicosImpl implements IReportesMedicosService {
 	@Override
 	public List<ReporteMedico> findAll(){
 		
-		return (List<ReporteMedico>) reportesMedicosDao.findAll();
+		return reportesMedicosDao.findAll();
 	}
 	
 	@Override
@@ -46,6 +46,12 @@ public class ReportesMedicosImpl implements IReportesMedicosService {
 	public void delete(Long id) {
 		reportesMedicosDao.deleteById(id);
 		
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<ReporteMedico> findByEstadoMedico(Long estadoMedicoId) {		
+		return reportesMedicosDao.findByEstadoMedico(estadoMedicoId);
 	}
 
 	

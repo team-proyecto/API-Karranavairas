@@ -2,7 +2,7 @@ package com.coronavirus.springboot.backend.apirest.models.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
+import java.util.Date;
 import java.util.List;
 
 import com.coronavirus.springboot.backend.apirest.models.entity.Departamento;
@@ -31,4 +31,11 @@ public interface IUsuariosCasosDao extends JpaRepository<UsuarioCaso, Long>{
 	
 	@Query("from Distrito")
 	public List<Distrito> findAllDistrito();	
+	
+	//para reporte por busqueda en rango de fecha
+	@Query("select uc from UsuarioCaso uc where uc.fechaRegistro>=?1 and uc.fechaRegistro>=?2")
+	public List<UsuarioCaso> findByFechaRegistro(Date fechaInicio, Date fechaFinal);
+	
+	
+	
 }

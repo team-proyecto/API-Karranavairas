@@ -21,4 +21,6 @@ public interface IReporteEconomicoService {
 	
 	public void delete (Long id);
 	
+	public List<ReporteEconomico> findByEstadoEconomico(Long estadoEconomicoId);
+	
 }

@@ -23,7 +23,7 @@ public class ReporteEconomicoServiceImpl implements IReporteEconomicoService {
 	@Transactional(readOnly = true)
 	public List<ReporteEconomico> findAll() {
 		
-		return (List<ReporteEconomico>) iReportesEconomicosDao.findAll();
+		return iReportesEconomicosDao.findAll();
 	}
 	
 	@Override
@@ -52,6 +52,12 @@ public class ReporteEconomicoServiceImpl implements IReporteEconomicoService {
 	public ReporteEconomico save(ReporteEconomico reporteEconomico) {
 		
 		return iReportesEconomicosDao.save(reporteEconomico);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<ReporteEconomico> findByEstadoEconomico(Long estadoEconomicoId) {
+		return iReportesEconomicosDao.findByEstadoEconomico(estadoEconomicoId);
 	}
 
 

@@ -23,7 +23,7 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 	@Transactional(readOnly = true)
 	public List<Provincia> findAll() {
 		
-		return (List<Provincia>) iProvinciasDao.findAll();
+		return iProvinciasDao.findAll();
 	}
 	
 	@Override

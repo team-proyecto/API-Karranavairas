@@ -1,5 +1,6 @@
 package com.coronavirus.springboot.backend.apirest.models.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class UsuariosCasosImpl implements IUsuariosCasosService {
 	@Transactional(readOnly = true)
 	public List<UsuarioCaso> findAll() {
 		
-		return (List<UsuarioCaso>) iUsuariosCasosDao.findAll();
+		return iUsuariosCasosDao.findAll();
 	}
 	
 	@Override
@@ -61,7 +62,7 @@ public class UsuariosCasosImpl implements IUsuariosCasosService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<TipoDocumento> findAllDocumentos() {
-		return (List<TipoDocumento>) iUsuariosCasosDao.findAllDocumento();
+		return iUsuariosCasosDao.findAllDocumento();
 	}
 	
 	
@@ -69,13 +70,13 @@ public class UsuariosCasosImpl implements IUsuariosCasosService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Nacionalidad> findAllNacionalidad() {		
-		return (List<Nacionalidad>) iUsuariosCasosDao.findAllNacionalidad();
+		return iUsuariosCasosDao.findAllNacionalidad();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Departamento> findAllDepartamento() {		
-		return (List<Departamento>) iUsuariosCasosDao.findAllDepartamento();
+		return iUsuariosCasosDao.findAllDepartamento();
 	}
 
 	@Override
@@ -93,8 +94,18 @@ public class UsuariosCasosImpl implements IUsuariosCasosService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Distrito> findAllDistrito() {		
-		return (List<Distrito>) iUsuariosCasosDao.findAllDistrito();
+		return iUsuariosCasosDao.findAllDistrito();
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<UsuarioCaso> findByFechaRegistro(Date fechaInicio, Date fechaFinal) {
+		return iUsuariosCasosDao.findByFechaRegistro(fechaInicio, fechaFinal);
+	}
+
+	
+
+	
 
 	
 

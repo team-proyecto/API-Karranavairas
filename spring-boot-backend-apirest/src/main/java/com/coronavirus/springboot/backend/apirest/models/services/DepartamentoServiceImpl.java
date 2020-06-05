@@ -23,7 +23,7 @@ public class DepartamentoServiceImpl implements IDepartamentoService {
 	@Transactional(readOnly = true)
 	public List<Departamento> findAll() {
 		
-		return (List<Departamento>) iDepartamentoDao.findAll();
+		return iDepartamentoDao.findAll();
 	}
 	
 	@Override

@@ -18,4 +18,6 @@ public interface IReportesMedicosService {
 	public ReporteMedico save (ReporteMedico reporteMedico);
 	
 	public void delete ( Long id);
+	
+	public List<ReporteMedico> findByEstadoMedico(Long estadoMedicoId);
 }

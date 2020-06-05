@@ -24,10 +24,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coronavirus.springboot.backend.apirest.models.entity.Cliente;
 import com.coronavirus.springboot.backend.apirest.models.entity.EstadoMedico;
 import com.coronavirus.springboot.backend.apirest.models.entity.ReporteMedico;
 import com.coronavirus.springboot.backend.apirest.models.services.IEstadoMedicoService;
@@ -49,6 +48,11 @@ public class ReportesMedicosRestController {
 	@GetMapping("/rmedicos/page/{page}")
 	public Page<ReporteMedico> index (@PathVariable Integer page){
 		return reportesMedicosService.findAll(PageRequest.of(page, 2));
+	}
+	
+	@GetMapping("/rmedicos/reporte")
+	public List<ReporteMedico> reportePorReporteEconomico (@RequestParam Long estadoMedicoId){
+		return reportesMedicosService.findByEstadoMedico(estadoMedicoId);
 	}
 	
 	@GetMapping("/rmedicos/{id}")

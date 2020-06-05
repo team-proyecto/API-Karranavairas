@@ -22,7 +22,7 @@ public class DistritoServiceImpl implements IDistritoService {
 	@Transactional(readOnly = true)
 	public List<Distrito> findAll() {
 		
-		return (List<Distrito>) iDistritoDao.findAll();
+		return iDistritoDao.findAll();
 	}
 	
 	@Override

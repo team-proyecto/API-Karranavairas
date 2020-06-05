@@ -1,5 +1,6 @@
 package com.coronavirus.springboot.backend.apirest.controllers;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -54,6 +56,11 @@ public class UsuariosCasosRestController {
 	@GetMapping("/usuarioscasos/page/{page}")
 	public Page<UsuarioCaso> index(@PathVariable Integer page){
 		return usuariosCasosService.findAll(PageRequest.of(page, 2));
+	}
+	
+	@GetMapping("/usuarioscasos/reporte")
+	public List<UsuarioCaso> reportePorFechaRegistro(@RequestParam Date fechaInicio,@RequestParam Date fechaFinal){
+		return usuariosCasosService.findByFechaRegistro(fechaInicio, fechaFinal);
 	}
 	
 	@GetMapping("/usuarioscasos/{id}")
@@ -195,16 +202,19 @@ public class UsuariosCasosRestController {
 		return usuariosCasosService.findAllNacionalidad();
 	}
 	
+	//para departamentos
 	@GetMapping("/usuarioscasos/departamentos")
 	public List<Departamento> listDepartamento() {
 		return usuariosCasosService.findAllDepartamento();
 	}	
 	
+	//para provincias
 	@GetMapping("/usuarioscasos/departamentos/{id}")
 	public Departamento listDepartamento(@PathVariable Long id) {
 		return usuariosCasosService.findByIDDepartamento(id);
 	}	
 	
+	//para distritos
 	@GetMapping("/usuarioscasos/provincias/{id}")
 	public Provincia listProvincias(@PathVariable Long id){
 		return usuariosCasosService.findIDProvincia(id);
