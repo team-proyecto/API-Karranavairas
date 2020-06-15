@@ -1,17 +1,3 @@
-INSERT INTO clientes (nombres_apellidos,provincia,departamento,distrito,estado) VALUES('Juan Delgado',true,-1.00545,'fgdfgdf','infectado');
-INSERT INTO clientes (nombres_apellidos,provincia,departamento,distrito,estado) VALUES('Roman Delgado',false,-1.00545,'dfgdfg', 'Infectado');
-INSERT INTO clientes (nombres_apellidos,provincia,departamento,distrito,estado) VALUES('Raul Delgado',true,'-2.00545','dfgdfg', 'Infectado');
-INSERT INTO clientes (nombres_apellidos,provincia,departamento,distrito,estado) VALUES('Rosa Delgado',false,'-3.00545','dfgdfgd', 'Infectado');
-INSERT INTO clientes (nombres_apellidos,provincia,departamento,distrito,estado) VALUES('Ana Delgado',true,'-4.00545','dfgdfg', 'Infectado');
-INSERT INTO clientes (nombres_apellidos,provincia,departamento,distrito,estado) VALUES('Mario Delgado',false,'-5.00545','dfgdfgdfg', 'Infectado');
-
-INSERT INTO compras (nombre_producto,cliente_id) VALUES('papaya',2);
-INSERT INTO compras (nombre_producto,cliente_id) VALUES('platano',1);
-INSERT INTO compras (nombre_producto,cliente_id) VALUES('pera',3);
-INSERT INTO compras (nombre_producto,cliente_id) VALUES('manzana',2);
-INSERT INTO compras (nombre_producto,cliente_id) VALUES('sandia',1);
-INSERT INTO compras (nombre_producto,cliente_id) VALUES('granada',1);
-
 INSERT INTO departamentos (nombre_departamento,estado) VALUES ('Cajamarca',true)
 INSERT INTO departamentos (nombre_departamento,estado) VALUES ('Arequipa',true)
 INSERT INTO departamentos (nombre_departamento,estado) VALUES ('Puno',true)
