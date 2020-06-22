@@ -38,6 +38,8 @@ import com.coronavirus.springboot.backend.apirest.models.services.IReportesMedic
 public class ReportesMedicosRestController {
 	@Autowired
 	IReportesMedicosService reportesMedicosService;
+	
+	@Autowired
 	IEstadoMedicoService estadoMedicoService;
 	
 	@GetMapping("/rmedicos")

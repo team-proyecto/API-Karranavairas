@@ -41,7 +41,7 @@ public class ReporteEconomico implements Serializable {
 	
 	private Boolean estado;
 	
-	@JsonIgnoreProperties({"reporteEconomico"})
+	@JsonIgnoreProperties(value = {"reporteEconomico"}, allowSetters = true)
 	@OneToOne(mappedBy = "reporteEconomico")	
 	private UsuarioCaso usuarioCaso;
 	

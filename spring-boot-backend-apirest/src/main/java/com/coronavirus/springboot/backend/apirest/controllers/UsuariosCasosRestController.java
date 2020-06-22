@@ -86,6 +86,29 @@ public class UsuariosCasosRestController {
 		return new ResponseEntity<UsuarioCaso>(usuarioCaso,HttpStatus.OK);		
 	}
 	
+	@GetMapping("/usuarioscasos/telefono/{telefono}")
+	public ResponseEntity<?> showByTelefono(@PathVariable String telefono) {
+		UsuarioCaso usuarioCaso = null;
+		Map<String, Object> response =  new HashMap<>();
+		
+		try {
+			usuarioCaso  = usuariosCasosService.findByTelefono(telefono);
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return  new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		if(usuarioCaso == null)
+		{
+			response.put("mensaje", "El usuarioCaso ID: El telefono ".concat(telefono.toString().concat(" no esta registrado en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+				
+		return new ResponseEntity<UsuarioCaso>(usuarioCaso,HttpStatus.OK);		
+	}
+	
 	@PostMapping("/usuarioscasos")
 	public ResponseEntity<?> save(@Valid @RequestBody UsuarioCaso usuarioCaso, BindingResult result) {
 		

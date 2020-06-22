@@ -39,4 +39,8 @@ public interface IUsuariosCasosService {
 	
 	public List<UsuarioCaso> findByFechaRegistro(Date fechaInicio, Date fechaFinal);
 	
+	public UsuarioCaso findByTelefono(String telefono);
+	
+	
+	
 }

@@ -38,7 +38,7 @@ public class Gps implements Serializable {
 	private Date fechaRegistro;
 
 	//@JsonIgnoreProperties({"hibernateLazyInitializaer","handler","gps"})
-	@JsonIgnoreProperties({"gps"})
+	@JsonIgnoreProperties(value = {"gps"}, allowSetters = true)
 	@OneToOne(mappedBy = "gps")	
 	private UsuarioCaso usuarioCaso;
 

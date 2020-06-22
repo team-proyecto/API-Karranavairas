@@ -41,7 +41,7 @@ public class ReporteMedico implements Serializable {
 	private Date fechaRegistro;
 	
 	
-	@JsonIgnoreProperties({"reporteMedico"})
+	@JsonIgnoreProperties(value={"reporteMedico"}, allowSetters = true)
 	@OneToOne(mappedBy = "reporteMedico")	
 	private UsuarioCaso usuarioCaso;
 

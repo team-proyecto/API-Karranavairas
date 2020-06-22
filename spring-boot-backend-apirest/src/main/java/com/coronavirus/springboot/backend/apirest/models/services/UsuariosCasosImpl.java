@@ -103,6 +103,12 @@ public class UsuariosCasosImpl implements IUsuariosCasosService {
 		return iUsuariosCasosDao.findByFechaRegistro(fechaInicio, fechaFinal);
 	}
 
+	//encontrar por telefono
+	@Override
+	public UsuarioCaso findByTelefono(String telefono) {
+		return iUsuariosCasosDao.findByTelefono(telefono);
+	}
+
 	
 
 	

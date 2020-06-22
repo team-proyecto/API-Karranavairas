@@ -22,14 +22,7 @@ public class EstadoEconomico implements Serializable {
 
 	private Boolean estado;
 	
-	public Boolean getEstado() {
-		return estado;
-	}
 
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
-	
 	public Long getId() {
 		return id;
 	}
@@ -44,6 +37,14 @@ public class EstadoEconomico implements Serializable {
 
 	public void setNombreEconomico(String nombreEconomico) {
 		this.nombreEconomico = nombreEconomico;
+	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
 	}
 
 	@Override

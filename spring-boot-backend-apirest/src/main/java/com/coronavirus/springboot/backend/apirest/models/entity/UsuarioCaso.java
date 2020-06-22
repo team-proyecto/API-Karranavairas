@@ -17,6 +17,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,6 +30,8 @@ public class UsuarioCaso implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(unique = true)
 	private String telefono;
 	private String nombre;
 	private String apellido;
@@ -63,7 +68,7 @@ public class UsuarioCaso implements Serializable {
 	@JoinColumn(name = "nacionalidad_id", nullable = true)
 	private Nacionalidad nacionalidad;
 
-	@JsonIgnoreProperties({"usuarioCaso"})
+	@JsonIgnoreProperties(value={"usuarioCaso"}, allowSetters = true)
 	@OneToOne
 	@JoinColumn(name = "gps_id",referencedColumnName = "id")	
 	private Gps gps;
@@ -72,12 +77,12 @@ public class UsuarioCaso implements Serializable {
 	@JoinColumn(name = "tipo_usuario_id", nullable = true)
 	private TipoUsuario tipoUsuario;
 
-	@JsonIgnoreProperties({"usuarioCaso"})
+	@JsonIgnoreProperties(value={"usuarioCaso"}, allowSetters = true)
 	@OneToOne
 	@JoinColumn(name = "reporte_economico_id",referencedColumnName = "id", nullable = true)
 	private ReporteEconomico reporteEconomico;
 
-	@JsonIgnoreProperties({"usuarioCaso"})
+	@JsonIgnoreProperties(value={"usuarioCaso"}, allowSetters = true)
 	@OneToOne
 	@JoinColumn(name = "reporte_medico_id",referencedColumnName = "id", nullable = true)
 	private ReporteMedico reporteMedico;

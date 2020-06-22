@@ -60,6 +60,8 @@ public class ReporteEconomicoServiceImpl implements IReporteEconomicoService {
 		return iReportesEconomicosDao.findByEstadoEconomico(estadoEconomicoId);
 	}
 
+	
+
 
 
 	

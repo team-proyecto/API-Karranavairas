@@ -53,6 +53,8 @@ public class ReportesEconomicosRestController {
 	
 	@Autowired
 	private IReporteEconomicoService reporteEconomicoService;
+	
+	@Autowired
 	private IEstadoEconomicoService estadoEconomicoService;
 	
 
@@ -196,12 +198,12 @@ public class ReportesEconomicosRestController {
 	}
 	
 	@GetMapping("/reconomicos/estadoseconomicos")
-	public List<EstadoEconomico> listAll ( ){
+	public List<EstadoEconomico> listEstadosEconomicos( ){
 		return estadoEconomicoService.findAll();
 	}
 	
 	@GetMapping("/reconomicos/estadoseconomicos/{id}")
-	public EstadoEconomico showEstado (@PathVariable Long id){
+	public EstadoEconomico showEstado(@PathVariable Long id){
 		return estadoEconomicoService.findById(id);
 	}
 	
