@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -36,10 +37,11 @@ public class UsuarioCaso implements Serializable {
 	private String nombre;
 	private String apellido;
 
-	@Temporal(TemporalType.DATE)
-	private Date nacimiento;
+	//@Temporal(TemporalType.DATE)
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private String nacimiento;
 
-	@Column(name = "numero_documento")
+	@Column(name = "numero_documento", unique = true)
 	private String numeroDocumento;	
 
 	@Column(name = "direccion_domicilio")
@@ -52,8 +54,9 @@ public class UsuarioCaso implements Serializable {
 	private Boolean condicionUso;
 
 	@Column(name = "fecha_registro")
-	@Temporal(TemporalType.DATE)
-	private Date fechaRegistro;
+	//@Temporal(TemporalType.DATE)
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private String fechaRegistro;
 
 	@JsonIgnoreProperties(value = {"usuarioCaso","hibernateLazyInitializer", "handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -90,10 +93,10 @@ public class UsuarioCaso implements Serializable {
 	@Column(name = "estado")
 	private Boolean estado;
 
-	@PrePersist
+	/*@PrePersist
 	public void prePersist() {
 		this.fechaRegistro = new Date();
-	}
+	}*/
 
 	public Long getId() {
 		return id;
@@ -127,11 +130,11 @@ public class UsuarioCaso implements Serializable {
 		this.apellido = apellido;
 	}
 
-	public Date getNacimiento() {
+	public String getNacimiento() {
 		return nacimiento;
 	}
 
-	public void setNacimiento(Date nacimiento) {
+	public void setNacimiento(String nacimiento) {
 		this.nacimiento = nacimiento;
 	}
 
@@ -167,11 +170,11 @@ public class UsuarioCaso implements Serializable {
 		this.condicionUso = condicionUso;
 	}
 
-	public Date getFechaRegistro() {
+	public String getFechaRegistro() {
 		return fechaRegistro;
 	}
 
-	public void setFechaRegistro(Date fechaRegistro) {
+	public void setFechaRegistro(String fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 

@@ -45,13 +45,13 @@ public class Cliente implements Serializable {
 	private String estado;
 
 	@Column(name = "create_at")
-	@Temporal(TemporalType.DATE)
-	private Date createAt;
+	//@Temporal(TemporalType.DATE)
+	private String createAt;
 
-	@PrePersist
+	/*@PrePersist
 	public void prePersist() {
 		this.createAt = new Date();
-	}
+	}*/
 
 	public String getNombresApellidos() {
 		return nombresApellidos;
@@ -101,11 +101,11 @@ public class Cliente implements Serializable {
 		this.distrito = distrito;
 	}
 
-	public Date getCreateAt() {
+	public String getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(Date createAt) {
+	public void setCreateAt(String createAt) {
 		this.createAt = createAt;
 	}
 

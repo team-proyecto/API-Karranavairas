@@ -34,18 +34,18 @@ public class Gps implements Serializable {
 	private Boolean estado;
 
 	@Column(name = "fecha_registro")
-	@Temporal(TemporalType.DATE)
-	private Date fechaRegistro;
+	//@Temporal(TemporalType.DATE)
+	private String fechaRegistro;
 
 	//@JsonIgnoreProperties({"hibernateLazyInitializaer","handler","gps"})
 	@JsonIgnoreProperties(value = {"gps"}, allowSetters = true)
 	@OneToOne(mappedBy = "gps")	
 	private UsuarioCaso usuarioCaso;
 
-	@PrePersist
+	/*@PrePersist
 	public void prePersist() {
 		this.fechaRegistro = new Date();
-	}
+	}*/
 
 	public UsuarioCaso getUsuarioCaso() {
 		return usuarioCaso;
@@ -55,11 +55,11 @@ public class Gps implements Serializable {
 		this.usuarioCaso = usuarioCaso;
 	}
 
-	public Date getFechaRegistro() {
+	public String getFechaRegistro() {
 		return fechaRegistro;
 	}
 
-	public void setFechaRegistro(Date fechaRegistro) {
+	public void setFechaRegistro(String fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 

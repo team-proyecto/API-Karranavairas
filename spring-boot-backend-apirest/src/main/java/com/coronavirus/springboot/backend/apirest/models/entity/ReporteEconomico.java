@@ -54,8 +54,8 @@ public class ReporteEconomico implements Serializable {
 	}
 	
 	@Column(name = "fecha_registro")
-	@Temporal(TemporalType.DATE)
-	private Date fechaRegistro;
+	//@Temporal(TemporalType.DATE)
+	private String fechaRegistro;
 	
 	
 	
@@ -77,16 +77,16 @@ public class ReporteEconomico implements Serializable {
 		this.usuarioCaso = usuarioCaso;
 	}
 
-	@PrePersist
+	/*@PrePersist
 	public void prePersist() {
 		this.fechaRegistro = new Date();
-	}
+	}*/
 	
-	public Date getFechaRegistro() {
+	public String getFechaRegistro() {
 		return fechaRegistro;
 	}
 
-	public void setFechaRegistro(Date fechaRegistro) {
+	public void setFechaRegistro(String fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 	

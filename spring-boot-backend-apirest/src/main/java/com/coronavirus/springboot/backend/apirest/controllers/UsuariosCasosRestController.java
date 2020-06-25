@@ -34,7 +34,10 @@ import com.coronavirus.springboot.backend.apirest.models.entity.Nacionalidad;
 import com.coronavirus.springboot.backend.apirest.models.entity.Provincia;
 import com.coronavirus.springboot.backend.apirest.models.entity.TipoDocumento;
 import com.coronavirus.springboot.backend.apirest.models.entity.UsuarioCaso;
+import com.coronavirus.springboot.backend.apirest.models.services.IDepartamentoService;
+import com.coronavirus.springboot.backend.apirest.models.services.IDistritoService;
 import com.coronavirus.springboot.backend.apirest.models.services.IGpsService;
+import com.coronavirus.springboot.backend.apirest.models.services.IProvinciaService;
 import com.coronavirus.springboot.backend.apirest.models.services.IUsuariosCasosService;
 
 @CrossOrigin(origins = {"http://localhost:4200","*"})
@@ -44,6 +47,15 @@ public class UsuariosCasosRestController {
 	
 	@Autowired
 	private IUsuariosCasosService usuariosCasosService;
+	
+	@Autowired
+	private IDepartamentoService departamentoService;
+	
+	@Autowired
+	private IProvinciaService provinciaService;
+	
+	@Autowired
+	private IDistritoService distritoService;
 	
 	@Autowired
 	private IGpsService gpsService;
@@ -242,6 +254,26 @@ public class UsuariosCasosRestController {
 	public Provincia listProvincias(@PathVariable Long id){
 		return usuariosCasosService.findIDProvincia(id);
 	}
+	
+	//un departamento
+	@GetMapping("/usuarioscasos/departamentos/nombre/{nombreDepartamento}")
+	public Departamento obtenerDepartamentoByNombre(@PathVariable String nombreDepartamento) {
+		return departamentoService.findbyNombreDepartamento(nombreDepartamento);
+	}	
+		
+	//un provincia
+	@GetMapping("/usuarioscasos/provincias/nombre/{nombreProvincia}")
+	public Provincia obtenerDepartamento(@PathVariable String nombreProvincia) {
+		return provinciaService.findbyNombreProvincia(nombreProvincia);
+	}	
+		
+	//un distrito
+	@GetMapping("/usuarioscasos/distritos/nombre/{nombreDistrito}")
+	public Distrito obtenerProvinciasByNombre(@PathVariable String nombreDistrito){
+		return distritoService.findbyNombreDistrito(nombreDistrito);
+	}
+	
+	
 	
 	@GetMapping("/usuarioscasos/distrito")
 	public List<Distrito> listDistritos(){

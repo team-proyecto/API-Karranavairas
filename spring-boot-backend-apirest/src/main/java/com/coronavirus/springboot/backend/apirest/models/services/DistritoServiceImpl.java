@@ -53,6 +53,14 @@ public class DistritoServiceImpl implements IDistritoService {
 		return iDistritoDao.save(distrito);
 	}
 
+	@Override
+	public Distrito findbyNombreDistrito(String nombreDistrito) {
+		
+		return iDistritoDao.findByNombreDistrito(nombreDistrito);
+	}
+	
+	
+
 	
 
 }

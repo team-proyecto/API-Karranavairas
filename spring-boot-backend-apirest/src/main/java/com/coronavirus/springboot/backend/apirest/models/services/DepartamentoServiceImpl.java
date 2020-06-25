@@ -54,6 +54,12 @@ public class DepartamentoServiceImpl implements IDepartamentoService {
 		return iDepartamentoDao.save(departamento);
 	}
 
+	@Override
+	public Departamento findbyNombreDepartamento(String nombreDepartamento) {
+		
+		return iDepartamentoDao.findByNombreDepartamento(nombreDepartamento);
+	}
+
 	
 
 	

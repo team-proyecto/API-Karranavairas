@@ -21,4 +21,6 @@ public interface IDistritoService {
 	
 	public void delete (Long id);
 	
+	public Distrito findbyNombreDistrito(String nombreDistrito);
+	
 }

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.coronavirus.springboot.backend.apirest.models.entity.Departamento;
+import com.coronavirus.springboot.backend.apirest.models.entity.Provincia;
 
 public interface IDepartamentoService {
 	
@@ -20,5 +21,6 @@ public interface IDepartamentoService {
 	
 	public void delete (Long id);
 	
+	public Departamento findbyNombreDepartamento(String nombreDepartamento);
 
 }

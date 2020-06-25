@@ -54,6 +54,14 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 		return iProvinciasDao.save(provincia);
 	}
 
+	@Override
+	public Provincia findbyNombreProvincia(String nombreProvincia) {
+	
+		return iProvinciasDao.findByNombreProvincia(nombreProvincia);
+	}
+	
+	
+
 	
 
 

@@ -37,18 +37,18 @@ public class ReporteMedico implements Serializable {
 	private Boolean estado;
 
 	@Column(name = "fecha_registro")
-	@Temporal(TemporalType.DATE)
-	private Date fechaRegistro;
+	//@Temporal(TemporalType.DATE)
+	private String fechaRegistro;
 	
 	
 	@JsonIgnoreProperties(value={"reporteMedico"}, allowSetters = true)
 	@OneToOne(mappedBy = "reporteMedico")	
 	private UsuarioCaso usuarioCaso;
 
-	@PrePersist
+	/*@PrePersist
 	public void prePersist() {
 		this.fechaRegistro = new Date();
-	}
+	}*/
 	
 	
 	
@@ -75,11 +75,11 @@ public class ReporteMedico implements Serializable {
 		this.estado = estado;
 	}
 
-	public Date getFechaRegistro() {
+	public String getFechaRegistro() {
 		return fechaRegistro;
 	}
 
-	public void setFechaRegistro(Date fechaRegistro) {
+	public void setFechaRegistro(String fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 
