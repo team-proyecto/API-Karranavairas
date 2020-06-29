@@ -152,7 +152,8 @@ public class ReportesEconomicosRestController {
 		try {
 
 		reporteEconomicoActualizado.setBonoAsignado(reporteEconomico.getBonoAsignado());	
-		reporteEconomicoActualizado.setMontoServicio(reporteEconomico.getMontoServicio());			
+		reporteEconomicoActualizado.setMontoServicio(reporteEconomico.getMontoServicio());
+		reporteEconomicoActualizado.setEstadoEconomico(reporteEconomico.getEstadoEconomico());
 		reporteEconomicoActualizado.setBoletaImagen(reporteEconomico.getBoletaImagen());			
 		reporteEconomicoActualizado.setEstado(reporteEconomico.getEstado());
 		

@@ -15,6 +15,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -30,6 +31,7 @@ public class ReporteEconomico implements Serializable {
 	private Boolean bonoAsignado;
 
 	@Column(name = "monto_servicio")
+	@NotEmpty
 	private Double montoServicio;
 
 	@Column(name = "boleta_imagen")
@@ -122,13 +124,6 @@ public class ReporteEconomico implements Serializable {
 		this.boletaImagen = boletaImagen;
 	}
 
-	public EstadoEconomico getEstadoEconomicoId() {
-		return estadoEconomico;
-	}
-
-	public void setEstadoEconomicoId(EstadoEconomico estadoEconomicoId) {
-		this.estadoEconomico = estadoEconomicoId;
-	}
 
 	@Override
 	public String toString() {
