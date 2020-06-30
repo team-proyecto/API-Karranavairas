@@ -31,7 +31,6 @@ public class ReporteEconomico implements Serializable {
 	private Boolean bonoAsignado;
 
 	@Column(name = "monto_servicio")
-	@NotEmpty
 	private Double montoServicio;
 
 	@Column(name = "boleta_imagen")
